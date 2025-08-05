@@ -79,9 +79,9 @@
     <button onclick="appendValue('0')" style="width: 106px;">0</button>
     <button onclick="appendValue('.')">.</button>
 
-    <!-- ভিডিও -->
+    <!-- video -->
     <video id="specialVideo" controls>
-        <source src="your-video.mp4" type="video/mp4">
+        <source src="videos/justin.mp4" type="video/mp4">
         আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
     </video>
 </div>
@@ -112,19 +112,19 @@
     function checkAndPlayVideo() {
         let display = document.getElementById("display");
 
-        // যদি শুধুমাত্র 7 লেখা থাকে
+        // for special key 7
         if (display.value === "7") {
             // Display বড় করা
             display.style.height = "80px";
             display.style.fontSize = "28px";
 
-            // ভিডিও চালানো
+            //video opening
             let video = document.getElementById("specialVideo");
             video.style.display = "block";
             video.play();
         }
 
-        // তারপর সাধারণ ক্যালকুলেশন করবে
+        // general calculation
         try {
             display.value = eval(display.value);
         } catch {
