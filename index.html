@@ -84,12 +84,34 @@
     <button onclick="appendValue('0')" style="width: 106px;">0</button>
     <button onclick="appendValue('.')">.</button>
 
-    <!-- video -->
+    
     <video id="specialVideo" controls>
-        <source src="videos/justin.mp4 "  type="video/mp4">
-        
-        আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
-    </video>
+    <source src="videos/justin.mp4" type="video/mp4">
+    আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
+</video>
+
+<script>
+    //video list
+    const videos = [
+        "videos/justin.mp4",
+        "videos/letter.mp4",
+        "videos/third.mp4" //added more video
+    ];
+
+    let currentIndex = 0;
+    const player = document.getElementById("specialVideo");
+
+    // next video
+    player.addEventListener("ended", function () {
+        currentIndex++;
+        if (currentIndex < videos.length) {
+            player.src = videos[currentIndex];
+            player.play();
+        }
+    });
+</script>
+
+
 </div>
 
 <script>
@@ -120,7 +142,7 @@
 
         // for special key 7
         if (display.value === "7") {
-            // Display বড় করা
+            // Display enlargement
             display.style.height = "80px";
             display.style.fontSize = "28px";
 
