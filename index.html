@@ -14,7 +14,7 @@
     }
     .calculator {
         display: inline-block;
-        background: #f3f3f3;
+        background:rgb(232, 61, 61);
         padding: 20px;
         border-radius: 10px;
         box-shadow: 0 0 10px rgba(0,0,0,0.2);
@@ -33,13 +33,13 @@
         color: white;
         border: none;
         border-radius: 10px;
-        background-color: rgb(27, 15, 2);
+        background-color: rgb(28, 8, 179);
         width: 50px;
         height: 50px;
         font-size: 18px;
         margin: 3px;
         cursor: pointer;
-        box-shadow: 5px 5px 5px silver;
+        box-shadow: 2p;
     }
     button:hover {
         background: #ddd;
@@ -50,10 +50,15 @@
         width: 300px;
         border-radius: 10px;
     }
+    .owner{
+        color: white;
+        font-size: 32px;
+        font-weight: 800;
+    }
 </style>
 
 <div class="calculator">
-    <p class="owner">ontor sheikh</p>
+    <p class="owner">Ontor Sheikh</p>
     <input class="calc-inpt" type="text" id="display" disabled>
     <br>
     <button onclick="clearDisplay()">C</button>
