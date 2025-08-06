@@ -3,44 +3,82 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Calculator with Video Playlist</title>
+<title>Scientific Calculator with Video Playlist</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
+  :root {
+    --bg-main: linear-gradient(135deg, #e23e57, #88304e);
+    --calc-bg: rgba(0, 0, 0, 0.85);
+    --btn-bg: #1c08b3;
+    --btn-text: white;
+    --hover-bg: #ffb400;
+    --hover-text: black;
+    --text-color: white;
+  }
+  body.light-mode {
+    --bg-main: linear-gradient(135deg, #f7f7f7, #dcdcdc);
+    --calc-bg: rgba(255, 255, 255, 0.95);
+    --btn-bg: #1976d2;
+    --btn-text: white;
+    --hover-bg: #ff7043;
+    --hover-text: white;
+    --text-color: black;
+  }
   body {
     font-family: Arial, sans-serif;
     text-align: center;
-    margin-top: 50px;
+    margin: 0;
+    background: var(--bg-main);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
   }
   .calculator {
     display: inline-block;
-    background: rgb(232, 61, 61);
+    background: var(--calc-bg);
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    margin-top: 40px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    max-width: 95%;
+    transition: background 0.3s;
   }
   .calc-inpt {
-    width: 210px;
-    height: 40px;
+    width: 100%;
+    height: 55px;
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 22px;
     text-align: right;
     padding-right: 10px;
     background-color: aquamarine;
-    transition: all 0.3s ease;
+    border: none;
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  .btn-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
   }
   button {
-    color: white;
-    border: 2px solid white;
-    border-radius: 10px;
-    background-color: rgb(28, 8, 179);
-    width: 50px;
-    height: 50px;
+    color: var(--btn-text);
+    border: none;
+    border-radius: 8px;
+    background-color: var(--btn-bg);
+    height: 55px;
     font-size: 18px;
-    margin: 3px;
     cursor: pointer;
+    transition: transform 0.15s, background 0.2s, color 0.2s;
   }
   button:hover {
-    background: #ddd;
-    color: black;
+    background: var(--hover-bg);
+    color: var(--hover-text);
+    transform: scale(1.05);
+  }
+  button:active {
+    transform: scale(0.95);
+  }
+  .btn-wide {
+    grid-column: span 2;
   }
   /* videos position*/
   .video-container {
@@ -49,14 +87,14 @@
   }
   video {
     display: none;
-    width: 300px;
+    width: 100%;
     border-radius: 10px;
   }
   .video-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: none;
+    background: rgba(0,0,0,0.5);
     color: white;
     border: none;
     padding:8px 14px;
@@ -68,52 +106,80 @@
   .prev { left: 10px; }
   .next { right: 10px; }
   .video-btn:hover {
-    box-shadow: 5px 5px 5px   rgb(214, 5, 246);
-    
+    background: var(--hover-bg);
   }
   .owner {
-    color: white;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 800;
-  }
-  body{
-    background-color: silver;
   }
   .company{
     color:rgb(5, 246, 234);
+  }
+  .theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s, color 0.3s;
+  }
+  .theme-toggle:hover {
+    background: var(--hover-bg);
+    color: var(--hover-text);
   }
 </style>
 </head>
 <body>
 
+<!-- Theme Toggle Button -->
+<button class="theme-toggle" onclick="toggleTheme()"><i class="fa-solid fa-moon"></i></button>
+
 <div class="calculator">
   <p class="owner">Ont<span class="company">o</span>r She<span class="company">ik</span>h</p>
   <input class="calc-inpt" type="text" id="display" disabled />
-  <br />
-  <button onclick="clearDisplay()">C</button>
-  <button onclick="deleteLast()">⌫</button>
-  <button onclick="appendValue('/')">÷</button>
-  <button onclick="appendValue('*')">×</button>
-  <br />
-  <button onclick="appendValue('7')">7</button>
-  <button onclick="appendValue('8')">8</button>
-  <button onclick="appendValue('9')">9</button>
-  <button onclick="appendValue('-')">−</button>
-  <br />
-  <button onclick="appendValue('4')">4</button>
-  <button onclick="appendValue('5')">5</button>
-  <button onclick="appendValue('6')">6</button>
-  <button onclick="appendValue('+')">+</button>
-  <br />
-  <button onclick="appendValue('1')">1</button>
-  <button onclick="appendValue('2')">2</button>
-  <button onclick="appendValue('3')">3</button>
-  <button onclick="checkAndPlayVideo()">=</button>
-  <br />
-  <button onclick="appendValue('0')" style="width: 106px;">0</button>
-  <button onclick="appendValue('.')"> . </button>
-  <button onclick="appendValue('৫ আগস্ট ২০২৫ তারিখে Md. Ontor Sheikh (Bsc-Math) আমাকে বিল্ড করেছেন')">disc</button>
 
+  <div class="btn-grid">
+    <button onclick="clearDisplay()">C</button>
+    <button onclick="deleteLast()"><i class="fa-solid fa-backspace"></i></button>
+    <button onclick="appendValue('/')">÷</button>
+    <button onclick="appendValue('*')">×</button>
+
+    <button onclick="appendValue(')')">)</button>
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+
+    <button onclick="appendValue('-')">−</button>
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+
+    <button onclick="appendValue('+')">+</button>
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+
+    <button onclick="checkAndPlayVideo()"><i class="fa-solid fa-equals"></i></button>
+    <button onclick="appendValue('0')" class="btn-wide">0</button>
+    <button onclick="appendValue('.')"> . </button>
+    <button onclick="appendValue('৫ আগস্ট ২০২৫ তারিখে Md. Ontor Sheikh (Bsc-Math) আমাকে বিল্ড করেছেন')">ontor</button>
+
+    <button onclick="appendTrig('sin')">sin</button>
+    <button onclick="appendTrig('cos')">cos</button>
+    <button onclick="appendTrig('tan')">tan</button>
+    <button onclick="appendValue('Math.log(')">log</button>
+
+    <button onclick="appendValue('Math.sqrt(')">√</button>
+    <button onclick="appendValue('**')">^</button>
+    <button onclick="appendPi()">π</button>
+    
+  </div>
 
   <!--videos position-->
   <div class="video-container">
@@ -121,21 +187,18 @@
       <source src="videos/justin.mp4" type="video/mp4" />
       আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
     </video>
-    <button id="prevBtn" class="video-btn prev">⏮</button>
-    <button id="nextBtn" class="video-btn next">⏭</button>
+    <button id="prevBtn" class="video-btn prev"><i class="fa-solid fa-backward"></i></button>
+    <button id="nextBtn" class="video-btn next"><i class="fa-solid fa-forward"></i></button>
   </div>
 </div>
 
 <script>
-
-
   const videos = [
     "videos/justin.mp4",
     "videos/letter.mp4",
     "videos/piya.mp4",
     "videos/paglu.mp4",
     "videos/Aaja.mp4"
-    
   ];
 
   let currentIndex = 0;
@@ -171,11 +234,23 @@
     document.getElementById("display").value += value;
   }
 
+  function appendPi() {
+    document.getElementById("display").value += Math.PI;
+  }
+
+  function appendE() {
+    document.getElementById("display").value += Math.E;
+  }
+
+  function appendTrig(func) {
+    document.getElementById("display").value += func + "(";
+  }
+
   function clearDisplay() {
     let display = document.getElementById("display");
     display.value = "";
-    display.style.height = "40px";
-    display.style.fontSize = "18px";
+    display.style.height = "55px";
+    display.style.fontSize = "22px";
     player.pause();
     player.currentTime = 0;
     player.style.display = "none";
@@ -191,10 +266,8 @@
   function checkAndPlayVideo() {
     let display = document.getElementById("display");
 
-    
-
     if (display.value === "7") {
-      display.style.height = "80px";
+      display.style.height = "70px";
       display.style.fontSize = "28px";
       player.src = videos[currentIndex];
       player.muted = false; 
@@ -204,10 +277,22 @@
     }
 
     try {
-      display.value = eval(display.value);
+      let expression = display.value
+        .replace(/sin\(([^)]+)\)/g, (_, angle) => Math.sin(Number(angle) * Math.PI / 180))
+        .replace(/cos\(([^)]+)\)/g, (_, angle) => Math.cos(Number(angle) * Math.PI / 180))
+        .replace(/tan\(([^)]+)\)/g, (_, angle) => Math.tan(Number(angle) * Math.PI / 180));
+
+      display.value = eval(expression);
     } catch {
       display.value = "Ontor Sheikh: Error";
     }
+  }
+
+  function toggleTheme() {
+    document.body.classList.toggle("light-mode");
+    const icon = document.querySelector(".theme-toggle i");
+    icon.classList.toggle("fa-sun");
+    icon.classList.toggle("fa-moon");
   }
 </script>
 
