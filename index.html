@@ -1,165 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Calculator with Video Playlist</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  .calculator {
+    display: inline-block;
+    background: rgb(232, 61, 61);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+  .calc-inpt {
+    width: 210px;
+    height: 40px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    text-align: right;
+    padding-right: 10px;
+    background-color: aquamarine;
+    transition: all 0.3s ease;
+  }
+  button {
+    color: white;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(28, 8, 179);
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    margin: 3px;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #ddd;
+    color: black;
+  }
+  /* ভিডিও কন্টেইনার ক্যালকুলেটরের ভিতর কিন্তু বাটনগুলোর নিচে */
+  .video-container {
+    position: relative;
+    margin-top: 20px;
+  }
+  video {
+    display: none;
+    width: 300px;
+    border-radius: 10px;
+  }
+  .video-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.6);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: none;
+  }
+  .prev { left: 10px; }
+  .next { right: 10px; }
+  .video-btn:hover {
+    background: rgba(0,0,0,0.8);
+  }
+  .owner {
+    color: white;
+    font-size: 32px;
+    font-weight: 800;
+  }
+</style>
 </head>
 <body>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin-top: 50px;
-    }
-    .calculator {
-        display: inline-block;
-        background:rgb(232, 61, 61);
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    }
-    .calc-inpt {
-        width: 210px;
-        height: 40px;
-        margin-bottom: 10px;
-        font-size: 18px;
-        text-align: right;
-        padding-right: 10px;
-        background-color: aquamarine;
-        transition: all 0.3s ease;
-    }
-    button {
-        color: white;
-        border: none;
-        border-radius: 10px;
-        background-color: rgb(28, 8, 179);
-        width: 50px;
-        height: 50px;
-        font-size: 18px;
-        margin: 3px;
-        cursor: pointer;
-        box-shadow: 2p;
-    }
-    button:hover {
-        background:#ddd;
-    }
-    video {
-        margin-top: 15px;
-        display: none;
-        width: 300px;
-        border-radius: 10px;
-    }
-    .owner{
-        color:white;
-        font-size: 32px;
-        font-weight: 800;
-    }
-</style>
 
 <div class="calculator">
-    <p class="owner">Ontor Sheikh</p>
-    <input class="calc-inpt" type="text" id="display" disabled>
-    <br>
-    <button onclick="clearDisplay()">C</button>
-    <button onclick="deleteLast()">⌫</button>
-    <button onclick="appendValue('/')">÷</button>
-    <button onclick="appendValue('*')">×</button>
-    <br>
-    <button onclick="appendValue('7')">7</button>
-    <button onclick="appendValue('8')">8</button>
-    <button onclick="appendValue('9')">9</button>
-    <button onclick="appendValue('-')">−</button>
-    <br>
-    <button onclick="appendValue('4')">4</button>
-    <button onclick="appendValue('5')">5</button>
-    <button onclick="appendValue('6')">6</button>
-    <button onclick="appendValue('+')">+</button>
-    <br>
-    <button onclick="appendValue('1')">1</button>
-    <button onclick="appendValue('2')">2</button>
-    <button onclick="appendValue('3')">3</button>
-    <button onclick="checkAndPlayVideo()">=</button>
-    <br>
-    <button onclick="appendValue('0')" style="width: 106px;">0</button>
-    <button onclick="appendValue('.')">.</button>
+  <p class="owner">Ontor Sheikh</p>
+  <input class="calc-inpt" type="text" id="display" disabled />
+  <br />
+  <button onclick="clearDisplay()">C</button>
+  <button onclick="deleteLast()">⌫</button>
+  <button onclick="appendValue('/')">÷</button>
+  <button onclick="appendValue('*')">×</button>
+  <br />
+  <button onclick="appendValue('7')">7</button>
+  <button onclick="appendValue('8')">8</button>
+  <button onclick="appendValue('9')">9</button>
+  <button onclick="appendValue('-')">−</button>
+  <br />
+  <button onclick="appendValue('4')">4</button>
+  <button onclick="appendValue('5')">5</button>
+  <button onclick="appendValue('6')">6</button>
+  <button onclick="appendValue('+')">+</button>
+  <br />
+  <button onclick="appendValue('1')">1</button>
+  <button onclick="appendValue('2')">2</button>
+  <button onclick="appendValue('3')">3</button>
+  <button onclick="checkAndPlayVideo()">=</button>
+  <br />
+  <button onclick="appendValue('0')" style="width: 106px;">0</button>
+  <button onclick="appendValue('.')">.</button>
 
-    
-    <video id="specialVideo" controls>
-    <source src="videos/justin.mp4" type="video/mp4">
-    আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
-</video>
-
-<script>
-    //video list
-    const videos = [
-        "videos/justin.mp4",
-        "videos/letter.mp4",
-        "videos/piya.mp4"
-        "videos/paglu.mp4" //added more video
-    ];
-
-    let currentIndex = 0;
-    const player = document.getElementById("specialVideo");
-
-    // next video
-    player.addEventListener("ended", function () {
-        currentIndex++;
-        if (currentIndex < videos.length) {
-            player.src = videos[currentIndex];
-            player.play();
-        }
-    });
-</script>
-
-
+  <!-- ভিডিও কন্টেইনার, বাটনগুলোর ঠিক নিচে -->
+  <div class="video-container">
+    <video id="specialVideo" controls muted>
+      <source src="videos/justin.mp4" type="video/mp4" />
+      আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
+    </video>
+    <button id="prevBtn" class="video-btn prev">⏮</button>
+    <button id="nextBtn" class="video-btn next">⏭</button>
+  </div>
 </div>
 
 <script>
-    function appendValue(value) {
-        document.getElementById("display").value += value;
+  const videos = [
+    "videos/justin.mp4",
+    "videos/letter.mp4",
+    "videos/piya.mp4",
+    "videos/paglu.mp4"
+  ];
+
+  let currentIndex = 0;
+  const player = document.getElementById("specialVideo");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function showVideoControls() {
+    player.style.display = "block";
+    prevBtn.style.display = "block";
+    nextBtn.style.display = "block";
+  }
+
+  nextBtn.addEventListener("click", function () {
+    currentIndex = (currentIndex + 1) % videos.length;
+    player.src = videos[currentIndex];
+    player.play();
+  });
+
+  prevBtn.addEventListener("click", function () {
+    currentIndex = (currentIndex - 1 + videos.length) % videos.length;
+    player.src = videos[currentIndex];
+    player.play();
+  });
+
+  player.addEventListener("ended", function () {
+    currentIndex = (currentIndex + 1) % videos.length;
+    player.src = videos[currentIndex];
+    player.play();
+  });
+
+  function appendValue(value) {
+    document.getElementById("display").value += value;
+  }
+
+  function clearDisplay() {
+    let display = document.getElementById("display");
+    display.value = "";
+    display.style.height = "40px";
+    display.style.fontSize = "18px";
+    player.pause();
+    player.currentTime = 0;
+    player.style.display = "none";
+    prevBtn.style.display = "none";
+    nextBtn.style.display = "none";
+  }
+
+  function deleteLast() {
+    let display = document.getElementById("display");
+    display.value = display.value.slice(0, -1);
+  }
+
+  function checkAndPlayVideo() {
+    let display = document.getElementById("display");
+
+    if (display.value === "7") {
+      display.style.height = "80px";
+      display.style.fontSize = "28px";
+      player.src = videos[currentIndex];
+      player.muted = false; 
+      showVideoControls();
+      player.play();
+      return;
     }
 
-    function clearDisplay() {
-        let display = document.getElementById("display");
-        let video = document.getElementById("specialVideo");
-
-        display.value = "";
-        display.style.height = "40px";
-        display.style.fontSize = "18px";
-
-        video.pause();
-        video.currentTime = 0;
-        video.style.display = "none";
+    try {
+      display.value = eval(display.value);
+    } catch {
+      display.value = "Ontor Sheikh: Error";
     }
-
-    function deleteLast() {
-        let display = document.getElementById("display");
-        display.value = display.value.slice(0, -1);
-    }
-
-    function checkAndPlayVideo() {
-        let display = document.getElementById("display");
-
-        // for special key 7
-        if (display.value === "7") {
-            // Display enlargement
-            display.style.height = "80px";
-            display.style.fontSize = "28px";
-
-            //video opening
-            let video = document.getElementById("specialVideo");
-            video.style.display = "block";
-            video.play();
-        }
-
-        // general calculation
-        try {
-            display.value = eval(display.value);
-        } catch {
-            display.value = "Ontor Sheikh: Error";
-        }
-    }
+  }
 </script>
 
 </body>
