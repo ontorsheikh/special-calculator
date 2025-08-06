@@ -42,7 +42,7 @@
     background: #ddd;
     color: black;
   }
-  /* ভিডিও কন্টেইনার ক্যালকুলেটরের ভিতর কিন্তু বাটনগুলোর নিচে */
+  /* videos position*/
   .video-container {
     position: relative;
     margin-top: 20px;
@@ -56,10 +56,10 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0,0,0,0.6);
+    background: none;
     color: white;
     border: none;
-    padding: 8px 12px;
+    padding:8px 14px;
     font-size: 14px;
     cursor: pointer;
     border-radius: 5px;
@@ -68,7 +68,8 @@
   .prev { left: 10px; }
   .next { right: 10px; }
   .video-btn:hover {
-    background: rgba(0,0,0,0.8);
+    box-shadow: 5px 5px 5px   rgb(214, 5, 246);
+    
   }
   .owner {
     color: white;
@@ -106,7 +107,7 @@
   <button onclick="appendValue('0')" style="width: 106px;">0</button>
   <button onclick="appendValue('.')">.</button>
 
-  <!-- ভিডিও কন্টেইনার, বাটনগুলোর ঠিক নিচে -->
+  <!--videos position-->
   <div class="video-container">
     <video id="specialVideo" controls muted>
       <source src="videos/justin.mp4" type="video/mp4" />
@@ -122,7 +123,8 @@
     "videos/justin.mp4",
     "videos/letter.mp4",
     "videos/piya.mp4",
-    "videos/paglu.mp4"
+    "videos/paglu.mp4",
+    "videos/Aaja.mp4"
   ];
 
   let currentIndex = 0;
