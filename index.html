@@ -76,6 +76,7 @@
     font-size: 32px;
     font-weight: 800;
   }
+  
 </style>
 </head>
 <body>
@@ -105,7 +106,7 @@
   <button onclick="checkAndPlayVideo()">=</button>
   <br />
   <button onclick="appendValue('0')" style="width: 106px;">0</button>
-  <button onclick="appendValue('.')">.</button>
+  <button onclick="appendValue('.')"> . </button>
   <button onclick="appendValue('৫ আগস্ট ২০২৫ তারিখে Md. Ontor Sheikh (Bsc-Math) আমাকে বিল্ড করেছেন')">disc</button>
 
 
@@ -121,13 +122,15 @@
 </div>
 
 <script>
+
+
   const videos = [
     "videos/justin.mp4",
     "videos/letter.mp4",
     "videos/piya.mp4",
     "videos/paglu.mp4",
-    "videos/Aaja.mp4",
-    "videos/ontor.mp4"
+    "videos/Aaja.mp4"
+    
   ];
 
   let currentIndex = 0;
@@ -182,6 +185,8 @@
 
   function checkAndPlayVideo() {
     let display = document.getElementById("display");
+
+    
 
     if (display.value === "7") {
       display.style.height = "80px";
