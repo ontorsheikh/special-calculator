@@ -53,6 +53,8 @@
     border: none;
     border-radius: 8px;
     box-sizing: border-box;
+    overflow-x: auto;       /* <-- এখানে যোগ করা হয়েছে */
+    white-space: nowrap;    /* <-- এখানে যোগ করা হয়েছে */
   }
   .btn-grid {
     display: grid;
@@ -168,7 +170,7 @@
     <button onclick="checkAndPlayVideo()"><i class="fa-solid fa-equals"></i></button>
     <button onclick="appendValue('0')" class="btn-wide">0</button>
     <button onclick="appendValue('.')"> . </button>
-    <button onclick="appendValue('৫ আগস্ট ২০২৫ তারিখে Md. Ontor Sheikh (Bsc-Math) আমাকে বিল্ড করেছেন')">ontor</button>
+    <button onclick="appendScrollingText('৫ আগস্ট ২০২৫ তারিখে Md. Ontor Sheikh (Bsc-Math) আমাকে বিল্ড করেছেন')">ontor</button>
 
     <button onclick="appendTrig('sin')">sin</button>
     <button onclick="appendTrig('cos')">cos</button>
@@ -247,6 +249,24 @@
 
   function appendTrig(func) {
     document.getElementById("display").value += func + "(";
+  }
+
+  function appendScrollingText(text) {
+    const display = document.getElementById("display");
+    display.value = "";
+    display.style.height = "55px";
+    
+
+    display.style.fontSize = "24px";
+    display.value = text;
+    display.scrollLeft = 0;
+    // Scrolling
+    const intervalId = setInterval(() => {
+      display.scrollLeft +=1;
+      if (display.scrollLeft >= display.scrollWidth - display.clientWidth) {
+        clearInterval(intervalId);
+      }
+    }, 40);
   }
 
   function clearDisplay() {
